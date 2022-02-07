@@ -1,3 +1,5 @@
+/* copy from index.js, change to tab listener */
+
 // @ts-check
 const namespace = '__chrome-highlight-heading-ext__';
 let checkPageButton;
@@ -32,11 +34,15 @@ function handleResponse(response) {
     setButtonText();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    triggerMessage(getInitialState);
-    checkPageButton = document.querySelector('#hheInitHeadingBtn');
+// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+//     state.isActive = false;
+//     if (!(changeInfo.status == "unloaded" || changeInfo.status == "loading")) {
+//         triggerMessage(getInitialState);
+//         triggerMessage(getTabs);
+//     }
+// });
 
-    checkPageButton.addEventListener('click', function () {
-        triggerMessage(getTabs);
-    }, false);
-}, false);
+// action when extension icon is clicked
+chrome.action.onClicked.addListener(() => {
+    triggerMessage(getTabs);
+});
